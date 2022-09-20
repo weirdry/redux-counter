@@ -4,6 +4,7 @@ import { selectHistory } from '../../store/counter/counter.selector'
 import {
 	resetHistory,
 	restoreCountFromHistory,
+	removeCountFromHistory,
 } from '../../store/counter/counter.action'
 
 import { Button } from 'cloz-ui'
@@ -18,6 +19,8 @@ export default function History() {
 	const handleDeleteHistory = () => dispatch(resetHistory())
 	const handleRestore = (index) =>
 		dispatch(restoreCountFromHistory(history, index))
+	const handleRemove = (index) =>
+		dispatch(removeCountFromHistory(history, index))
 
 	return (
 		<HistoryContainer>
@@ -26,10 +29,16 @@ export default function History() {
 					<li key={index}>
 						{count}
 						<button
-							className="restore-button"
+							className="list-item-button restore-button"
 							onClick={() => handleRestore(index)}
 						>
 							RESTORE
+						</button>
+						<button
+							className="list-item-button remove-button"
+							onClick={() => handleRemove(index)}
+						>
+							&#10005;
 						</button>
 					</li>
 				))}

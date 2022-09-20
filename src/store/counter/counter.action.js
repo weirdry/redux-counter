@@ -8,6 +8,11 @@ const restoreCount = (history, index) => {
 	return countToRestore
 }
 
+const removeCount = (history, index) => {
+	const newHistory = history.filter((_, storedIndex) => storedIndex !== index)
+	return newHistory
+}
+
 export const increaseCount = (count) =>
 	createAction(COUNTER_ACTION_TYPES.SET_COUNT, count + 1)
 
@@ -27,4 +32,9 @@ export const resetHistory = () =>
 export const restoreCountFromHistory = (history, index) => {
 	const countToRestore = restoreCount(history, index)
 	return createAction(COUNTER_ACTION_TYPES.SET_COUNT, countToRestore)
+}
+
+export const removeCountFromHistory = (history, index) => {
+	const newHistory = removeCount(history, index)
+	return createAction(COUNTER_ACTION_TYPES.SET_HISTORY, newHistory)
 }
